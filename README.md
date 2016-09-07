@@ -23,10 +23,10 @@ Route culture can be easily retrieved as the culture is added in route values di
 
 ```C#
 protected override void InitializeCulture() {
-    var routeCulture = this.RouteData.Values["culture"];
+    var routeCulture = this.RouteData.Values["culture"] as string;
     if (routeCulture != null) {
-        Thread.CurrentThread.CurrentCulture = new CultureInfo(routeCulture);
-        Thread.CurrentThread.CurrentUICulture = new CultureInfo(routeCulture);
+        this.Culture = new CultureInfo(routeCulture);
+        this.UICulture = new CultureInfo(routeCulture);
     }
 }
 ```
