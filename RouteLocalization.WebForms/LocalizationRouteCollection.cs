@@ -91,7 +91,7 @@
         {
             get
             {
-                return _localizedRoutesContainer.ContainsKey(string.Empty) ? _localizedRoutesContainer[string.Empty] : null;
+                return _localizedRoutesContainer.ContainsKey(NeutralCulture) ? _localizedRoutesContainer[NeutralCulture] : null;
             }
         }
 
