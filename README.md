@@ -30,6 +30,13 @@ protected override void InitializeCulture() {
     }
 }
 ```
+## Outbound routing
+```C#
+// Classical way
+RouteTable.Routes.GetVirtualPath(null, "OfferDetails", new RouteValueDictionary() {{"title", "chef-de-projet"}, {"id", 12}}).VirtualPath
 
+// Through RouteUrlExpressionBuilder
+<asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:title=chef-de-projet,id=12,routename=OfferDetails%>" Text="Details" /> 
+```
 
 Inspired by [RouteLocalization](https://github.com/Dresel/RouteLocalization)
