@@ -118,7 +118,7 @@
         }
 
         [Test]
-        public void LocalizationRouteCollection_OutboundRouteTest()
+        public void LocalizationRouteCollection_OutboundRoute_CultureInThreadTest()
         {
             var localizedRoute = CreateLocalizedRoute();
             localizedRoute.AddTranslation(LocalizationRouteCollection.NeutralCulture, "neutral/neutral-{title}_{id}");
@@ -145,6 +145,28 @@
                 tester.WithRouteInfo("OfferDetails", new { title = "project-manager", id = 12 })
                     .ShouldGenerateUrl("/neutral/neutral-project-manager_12");
             }
+
+        }
+
+        [Test]
+        public void LocalizationRouteCollection_OutboundRoute_CultureInRouteValuesTest()
+        {
+            var localizedRoute = CreateLocalizedRoute();
+            localizedRoute.AddTranslation(LocalizationRouteCollection.NeutralCulture, "neutral/neutral-{title}_{id}");
+            localizedRoute.AddTranslation("en-US", "job/job-{title}_{id}");
+            localizedRoute.AddTranslation("fr-FR", "offre-de-emploi/offre-{title}_{id}");
+
+            var routes = new RouteCollection();
+            routes.Add("OfferDetails", localizedRoute);
+
+            var tester = new RouteTester(routes);
+
+            tester.WithRouteInfo("OfferDetails", new { title = "project-manager", id = 12, culture = "en-US" })
+                    .ShouldGenerateUrl("/job/job-project-manager_12");
+            tester.WithRouteInfo("OfferDetails", new { title = "chef-de-projet", id = 12, culture = "fr-FR" })
+                    .ShouldGenerateUrl("/offre-de-emploi/offre-chef-de-projet_12");
+            tester.WithRouteInfo("OfferDetails", new { title = "project-manager", id = 12, culture = "nl-NL" })
+                .ShouldGenerateUrl("/neutral/neutral-project-manager_12");
         }
 
         [Test]

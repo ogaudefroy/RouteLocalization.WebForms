@@ -198,7 +198,7 @@
                 throw new ArgumentNullException("values");
             }
 
-            string currentCulture = Thread.CurrentThread.CurrentUICulture.Name;
+            string currentCulture = values["culture"] as string ?? Thread.CurrentThread.CurrentUICulture.Name;
             var localizationRoute = this.GetLocalizedOrDefaultRoute(currentCulture);
             if (localizationRoute == null)
             {
