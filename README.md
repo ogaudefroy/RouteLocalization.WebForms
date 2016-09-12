@@ -35,6 +35,9 @@ protected override void InitializeCulture() {
 // Classical way
 RouteTable.Routes.GetVirtualPath(null, "OfferDetails", new RouteValueDictionary() {{"title", "chef-de-projet"}, {"id", 12}}).VirtualPath
 
+// With explicit culture
+RouteTable.Routes.GetVirtualPath(null, "OfferDetails", new RouteValueDictionary() {{"title", "chef-de-projet"}, {"id", 12}, {"id", "fr-FR"}).VirtualPath
+
 // Through RouteUrlExpressionBuilder
 <asp:HyperLink runat="server" NavigateUrl="<%$RouteUrl:title=chef-de-projet,id=12,routename=OfferDetails%>" Text="Details" /> 
 ```

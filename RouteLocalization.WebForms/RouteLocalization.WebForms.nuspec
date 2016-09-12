@@ -8,7 +8,8 @@
     <projectUrl>https://github.com/ogaudefroy/RouteLocalization.WebForms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ASP.Net localized routing for WebForms routes</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>-v0.1.0: Initial Release
+    -v0.1.1: Support explicit culture addition in outbound routing</releaseNotes>
     <copyright>$copyright$</copyright>
   </metadata>
 </package>
