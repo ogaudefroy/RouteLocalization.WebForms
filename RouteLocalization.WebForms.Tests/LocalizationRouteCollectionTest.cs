@@ -145,7 +145,6 @@
                 tester.WithRouteInfo("OfferDetails", new { title = "project-manager", id = 12 })
                     .ShouldGenerateUrl("/neutral/neutral-project-manager_12");
             }
-
         }
 
         [Test]
@@ -216,8 +215,23 @@
         [Test]
         public void LocalizationRouteCollection_GetVirtualPathWithNullValues_ThrowsArgumentNullException()
         {
-            var localizedRoute = CreateLocalizedRoute();
-            Assert.That(() => localizedRoute.GetVirtualPath(new RequestContext(), null), Throws.InstanceOf<ArgumentNullException>());
+            var localizedRoute = new LocalizationRouteCollection("~/pages/offer/list.aspx");
+            localizedRoute.AddTranslation("en-US", "job/job-list");
+            localizedRoute.AddTranslation("fr-FR", "offre-de-emploi/liste-offre");
+
+            var routes = new RouteCollection();
+            routes.Add("OfferList", localizedRoute);
+
+            var tester = new RouteTester(routes);
+
+            using (new CultureScopedContext("en-US"))
+            {
+                tester.WithRouteInfo("OfferList").ShouldGenerateUrl("/job/job-list");
+            }
+            using (new CultureScopedContext("fr-FR"))
+            {
+                tester.WithRouteInfo("OfferList").ShouldGenerateUrl("/offre-de-emploi/liste-offre");
+            }
         }
     }
 }

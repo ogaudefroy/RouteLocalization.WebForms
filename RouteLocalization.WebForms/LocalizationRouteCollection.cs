@@ -193,18 +193,14 @@
             {
                 throw new ArgumentNullException("requestContext");
             }
-            if (values == null)
-            {
-                throw new ArgumentNullException("values");
-            }
-
-            string currentCulture = values["culture"] as string ?? Thread.CurrentThread.CurrentUICulture.Name;
+            
+            string currentCulture = (values?["culture"] as string) ?? Thread.CurrentThread.CurrentUICulture.Name;
             var localizationRoute = this.GetLocalizedOrDefaultRoute(currentCulture);
             if (localizationRoute == null)
             {
                 return null;
             }
-            var pathData = localizationRoute.GetVirtualPath(requestContext, new RouteValueDictionary(CopyAndRemoveFromValueDictionary(values)));
+            var pathData = localizationRoute.GetVirtualPath(requestContext, values != null ? new RouteValueDictionary(CopyAndRemoveFromValueDictionary(values)) : null);
             return pathData;
         }
 
@@ -229,6 +225,10 @@
 
         private static IDictionary<string, object> CopyAndRemoveFromValueDictionary(IDictionary<string, object> values)
         {
+            if (values == null)
+            {
+                return null;
+            }
             Dictionary<string, object> routeValueDictionary = new Dictionary<string, object>(values, StringComparer.OrdinalIgnoreCase);
             routeValueDictionary.Remove("culture");
             return routeValueDictionary;

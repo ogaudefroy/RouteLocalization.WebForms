@@ -11,6 +11,11 @@
             routeCollection.AddTranslation("fr-FR", "offre-de-emploi/offre-{title}_{id}");
             routeCollection.AddTranslation("en-US", "job/job-{title}_{id}");
             RouteTable.Routes.Add("OfferDetails", routeCollection);
+
+            var routeCollection2 = new LocalizationRouteCollection("~/pages/offer/list.aspx");
+            routeCollection2.AddTranslation("fr-FR", "offre-de-emploi/liste-offre");
+            routeCollection2.AddTranslation("en-US", "job/list-job");
+            RouteTable.Routes.Add("OfferList", routeCollection2);
         }
     }
 }

@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>ASP.Net localized routing for WebForms routes</description>
     <releaseNotes>
+      -0.1.2: Added support for null values with route defaults.
       -0.1.1: Support explicit culture addition in outbound routing
       -0.1.0: Initial Release
     </releaseNotes>
